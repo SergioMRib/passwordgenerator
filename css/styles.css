@@ -1,0 +1,77 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+section {
+    margin-top: 50px;
+}
+h1 {
+    color: rgb(4, 54, 38);
+}
+
+#password-form {
+    display: grid;
+    width: 300px;
+    margin: 0 auto;
+    padding: 10px;
+    grid-template-columns: auto auto;
+    grid-gap: 0.8em 0;
+    border: 2px solid rgb(4, 54, 38);
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px #aaaaaa;
+    text-align: center;
+}
+
+input {
+    width: 5em;
+    justify-self: center;
+}
+
+#generate-button {
+    color: rgb(4, 54, 38);
+    grid-column: 1 / -1;
+    font-size: 1.5em;
+    background: transparent;
+    border: 2px solid rgb(4, 54, 38);
+    border-radius: 6px;
+    cursor: pointer;
+}
+#generate-button:hover {
+    background-color: rgb(4, 54, 38);
+    color: white;
+    box-shadow: 3px 3px 3px #aaaaaa;
+}
+
+.far {
+    margin-left: 20px;
+}
+.far:hover {
+    box-shadow: 3px 3px 3px  #aaaaaa;
+    cursor: pointer;
+}
+
+.description {
+    font-size: 0.8em;
+    text-align: justify;
+}
+
+#strength {
+    font-size: 0.6em;
+    color: green
+}
+
+
+

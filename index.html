@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+	<meta charset="utf-8">
+	<title>Password Generator by SergioMRib</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script src="https://kit.fontawesome.com/be12cc7810.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+	<div class="container" style="text-align:center">
+		<section id="main">
+            <h1>Password generator</h1>
+
+            <div id="criteria">
+                <p>Choose type of characters:</p>
+                <form id="password-form" onsubmit="submitData(event)">
+                    Length<input name="length" type="number" value="25">
+                    Lowercase<input name="lowercase" type="checkbox" checked>
+                    Uppercase<input name="uppercase" type="checkbox" checked>
+                    Digits<input name="digits" type="checkbox" checked>
+                    Symbols<input name="symbols" type="checkbox" checked>
+                    <input id="generate-button" name="generate-button" type="submit" value="Generate">
+
+                </form>
+            </div>
+            <div id="generator">
+                <p>Generated password:</p>
+                <p><span id="password">_______________</span><i class="far fa-clone"></i></p>
+                <p id="strength"></p>
+            </div>
+        </section>
+        <section class="description">
+            <p>The intent of this page is to allow you to create a strong password to be used wherever you want.</p>
+            <p>
+                If you found this page, I believe you already care about strong passwords and security but, nonetheless, let me give you some interesting tips from mozilla right
+                 <a target="_tab" href="https://blog.mozilla.org/internetcitizen/2017/01/25/better-password-security/">here</a>.
+            </p>
+            <p>
+                I would also advise to use a password manager since the ones created here might be hard to memorize. <a href="https://duckduckgo.com/?q=should+I+use+a+password+manager">These</a> 
+                might convince you to use one.
+            </p>
+            <p>
+                There are many PW managers out there 
+                like <a target="_tab" href="https://www.mozilla.org/en-US/firefox/lockwise/">Firefox Lockwise</a>, 
+                <a target="_tab" href="www.lastpass.com">LastPass</a> and 
+                <a target="_tab" href="www.dashlane.com">Dashlane</a>. Read about them and take your pick.
+            </p>
+        </section>
+	</div>
+    <footer>
+
+        
+    </footer>
+    <script src="js/app.js"></script>
+</body>
+</html>
