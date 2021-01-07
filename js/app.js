@@ -17,6 +17,7 @@ let possibleCharacters = '',
     digits = '1234567890',
     password = '';    
 
+let password = [];
 
 /**
  * Gets the form and its data
@@ -107,7 +108,7 @@ copyButton.addEventListener('click', function() {
     element.setSelectionRange(0, 99999);
     document.execCommand("copy");
     element.remove();
-    copiedWarning();
+    showCopiedWarning();
 })
 
 function calculateEntropy(charSet, length) {
@@ -124,7 +125,7 @@ function calculateEntropy(charSet, length) {
     entropyElem.innerHTML = text;
 }
 
-function copiedWarning () {
+function showCopiedWarning () {
     let element = document.createElement("span")
     copyButton.innerHTML = 'copied'
 
