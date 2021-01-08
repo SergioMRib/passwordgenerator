@@ -22,7 +22,7 @@ function submitData(form) {
     } else if (passLength === 0 || passLength === NaN) {
         alert("Password must have more than 0 caracters.")
         return
-    } else if (passLength < 6) {
+    } else if (passLength < 4) {
         alert("This is considered a weak password. It should have at least 16 characters")
         return
     }
@@ -61,7 +61,10 @@ function submitData(form) {
     let password = generatePassword(passLength, charTypes);
     //calculateEntropy(possibleCharacters.length, passLength);
 
-    passwordElem.innerHTML = password;
+    
+    passwordElem.innerHTML = password.password;
+    entropyElem.innerHTML = "Entropy: " + password.entropy;
+    entropyElem.className = password.strengthClass;
 }
 
 /**
@@ -84,9 +87,22 @@ function generatePassword(length, types) {
     while (!checkPattern(pattern, types));
     
     // creating the password
-    let password = createPassword(pattern);
 
-    return password;
+    let allCharacters = {
+        lowercaseLetters: 'abcdefghijklmnopqrstuvwxyz',
+        uppercaseLetters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+        symbols: ',;:.-_?*)(/&%$#!@£{[]}',
+        digits: '1234567890'
+    };
+
+    let password = populatePattern(pattern, allCharacters);
+    let entropy = calculateEntropy(types, allCharacters, length);
+    let strengthClass = passwordStrength(entropy);
+    return {
+        password: password, 
+        entropy: entropy,
+        strengthClass: strengthClass
+    };
 }
 
 /**
@@ -125,26 +141,22 @@ function checkPattern(pattern, types) {
  *      u for uppercase, 
  *      d for digits,
  *      s for symbols
+ * @param {object} 
  * @returns {string} password
  */
-function createPassword(pattern) {
-
-    let lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz',
-        uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-        symbols = ',;:.-_?*)(/&%$#!@£{[]}',
-        digits = '1234567890';
+function populatePattern(pattern, charactersObject) {
 
     let passwordArray = pattern.map(element => {
         
         switch (element) {
             case 'l':
-                return lowercaseLetters[Math.floor(Math.random() * lowercaseLetters.length)];
+                return charactersObject.lowercaseLetters[Math.floor(Math.random() * charactersObject.lowercaseLetters.length)];
             case 'u':
-                return uppercaseLetters[Math.floor(Math.random() * uppercaseLetters.length)];
+                return charactersObject.uppercaseLetters[Math.floor(Math.random() * charactersObject.uppercaseLetters.length)];
             case 's':
-                return symbols[Math.floor(Math.random() * symbols.length)];
+                return charactersObject.symbols[Math.floor(Math.random() * charactersObject.symbols.length)];
             case 'd':
-                return digits[Math.floor(Math.random() * digits.length)]; 
+                return charactersObject.digits[Math.floor(Math.random() * charactersObject.digits.length)]; 
             } 
     })
     return passwordArray.join('');
@@ -167,4 +179,59 @@ copyButton.addEventListener('click', function() {
 function showCopiedWarning () {
     let element = document.createElement("span")
     copyButton.innerHTML = 'copied'
+}
+
+/**
+ * 
+ * @param {array} types  
+ * @param {object} charactersObject 
+ * @param {integer} length 
+ */
+function calculateEntropy(types, charactersObject, length) {
+    let entropy, possibleCharacters = 0;
+
+    types.forEach(element => {
+        if (element === 'l') {
+            possibleCharacters += charactersObject.lowercaseLetters.length;
+        }
+        if (element === 'u') {
+            possibleCharacters += charactersObject.uppercaseLetters.length;
+        }
+        if (element === 's') {
+            possibleCharacters += charactersObject.symbols.length;
+        }
+        if (element === 'd') {
+            possibleCharacters += charactersObject.digits.length;
+        }
+    })
+    entropy = Math.floor(Math.log2(Math.pow(possibleCharacters, length)));
+    if (entropy > 40) {
+        strenght = 'Strong password'
+    } else if (entropy > 30) {
+        strenght = 'Somewhat strong password'
+    } else {
+        strenght = 'Weak passowrd'
+    }
+    return entropy;
+}
+
+
+/**
+ * 
+ * @param {integer} entropy 
+ * @returns {string} to add as a class to the html element
+ */
+function passwordStrength(entropy) {
+    if (entropy < 28) {
+        return "text-strength-very-weak";
+    } else if (entropy >= 28 && entropy < 35) {
+        console.log(entropy)
+        return "text-strength-weak";
+    } else if (entropy >=35 && entropy < 59) {
+        return "text-strength-reasonable";
+    } else if (entropy >=60 && entropy < 127) {
+        return "text-strength-strong";
+    } else {
+        return "text-strength-very-strong";
+    }
 }

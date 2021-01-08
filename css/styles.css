@@ -68,10 +68,56 @@ input {
     text-align: justify;
 }
 
-#strength {
+/* #strength {
     font-size: 0.6em;
     color: green
+} */
+
+
+/* table styling */
+.wrap {
+    width: 100%;
+    margin: 0 auto;
+    background: white;
+}
+  
+table {
+    font-size: 0.8em;
+    border: 1px solid rgb(4, 54, 38);
+    border-radius: 6px;
+    margin: 5px 0;
+    text-align: center;
 }
 
+th, td {
+    height: 2.5em;
+}
 
+.table-description {
+    text-align: left;
+}
 
+.text-strength-very-weak {
+    color: red;
+    font-weight: 600;
+}
+
+.text-strength-weak {
+    color: rgb(163, 91, 103);
+    font-weight: 600;
+}
+
+.text-strength-reasonable {
+    color: rgb(163, 185, 35);
+    font-weight: 600;
+}
+
+.text-strength-strong {
+    color: rgb(73, 192, 26);
+    font-weight: 600;
+}
+
+.text-strength-very-strong {
+    color: rgb(14, 84, 150);
+    font-weight: 600;
+}
