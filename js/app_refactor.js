@@ -166,7 +166,8 @@ function populatePattern(pattern, charactersObject) {
 copyButton.addEventListener('click', function() {
    
     let element = document.createElement("input")
-    document.body.appendChild(element)
+    let password = document.getElementById("password").innerHTML;
+    document.body.appendChild(element);
 
     element.value = password;
     element.select()
